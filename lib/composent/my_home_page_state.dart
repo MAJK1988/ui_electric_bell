@@ -25,6 +25,8 @@ class _MyHomePageState extends State<MyHomePage> {
     Size size = MediaQuery.of(context).size;
     String valeur="250.8 KWH";
     return Scaffold(
+      
+  
       appBar:AppBar(
         title:const Text("Electric Bill"),
         backgroundColor: kPrimaryColor,
@@ -33,16 +35,18 @@ class _MyHomePageState extends State<MyHomePage> {
           PopupMenuButton(
             icon:const Icon(Icons.more_vert),
             itemBuilder: (BuildContext context) => <PopupMenuEntry>[
-              const PopupMenuItem(
-                child: ListTile(
-                  leading: Icon(Icons.settings,color: kPrimaryColor,),
-                  title: Text('Settings',style: TextStyle(color:kPrimaryColor,fontSize: 15,fontWeight:FontWeight.bold)),
+             const  PopupMenuItem(
+                child:  ListTile(
+                  
+                  leading:  Icon(Icons.settings,color: kPrimaryColor,),
+                  title:  Text('Settings',style: TextStyle(color:kPrimaryColor,fontSize: 15,fontWeight:FontWeight.bold)),
                 ),
               ),
-              const PopupMenuItem(
+               PopupMenuItem(
                 child: ListTile(
-                  leading: Icon(Icons.anchor,color: kPrimaryColor,),
-                  title: Text('Fixation a threshold',style: TextStyle(color:kPrimaryColor,fontSize: 15,fontWeight:FontWeight.bold)),
+                  onTap: (){Navigator.pushNamed(context, '/settings');},
+                  leading:const  Icon(Icons.anchor,color: kPrimaryColor,),
+                  title: const Text('Fixation a threshold',style: TextStyle(color:kPrimaryColor,fontSize: 15,fontWeight:FontWeight.bold)),
                 ),
               ),
               const PopupMenuItem(
@@ -59,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SingleChildScrollView(
           child: Column(
         children: [
-          Plot(size: size),// Plot the electric power consumer
+          Plot(size: size,plotTwoLine: false,requiredPower: 0),// Plot the electric power consumer
            TitleSection( title: "Counter: ",
           size: size,valeur:valeur),
             Padding(
@@ -132,100 +136,4 @@ class _MyHomePageState extends State<MyHomePage> {
       )),
     );
   }
-}
-
-Widget positionUsed(Size size,double left, double top, String title, String valeur,String price,Color valeurPriceColor ){
-
-  return 
-  Positioned(left:left,top:top,
-  child: Container(
-    alignment: Alignment.center,
-    width: size.width*.4,
-    height:size.height*.18,
-    decoration: getBoxDecoration(Colors.white),
-            child:Padding(
-              padding: const EdgeInsets.only(left:8,right:8,bottom:8),
-              child: Column(
-                mainAxisAlignment:MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children:<Widget> [
-
-                Text(title,textAlign: TextAlign.justify,style:const TextStyle(
-                  color:kPrimaryColor,fontSize: 13,
-                fontWeight:FontWeight.w500,
-                )),
-                SizedBox(height:size.height*.018),
-                Row(mainAxisAlignment:MainAxisAlignment.spaceBetween,
-                  children:<Widget> [
-                   Text(valeur,style: TextStyle(color:valeurPriceColor,fontSize: 12,fontWeight:FontWeight.bold)),
-                   Text(price,style: TextStyle(color:valeurPriceColor,fontSize: 12,fontWeight:FontWeight.bold)),
-                ],),
-
-                
-              ],))),
-            );
-}
-
-Widget myPopMenu() {
-  return PopupMenuButton(
-      color: kPrimaryColor,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-            alignment: Alignment.center,
-            width: 180,
-            height: 40,
-            decoration: const BoxDecoration(
-                color: kPrimaryColor,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
-                )),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                 Icon(Icons.more_vert),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("select time scale"),
-                ),
-              ],
-            )),
-      ),
-      onSelected: (value) {},
-      itemBuilder: (context) => [
-            PopupMenuItem(
-                value: 1,
-                child: Row(
-                  children: const <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(2, 2, 8, 2),
-                      //child: Icon(Icons.print),
-                    ),
-                    Text('Day')
-                  ],
-                )),
-            PopupMenuItem(
-                value: 2,
-                child: Row(
-                  children: const <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(2, 2, 8, 2),
-                      //child: Icon(Icons.share),
-                    ),
-                    Text('Week')
-                  ],
-                )),
-            PopupMenuItem(
-                value: 3,
-                child: Row(
-                  children: const <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(2, 2, 8, 2),
-                      //child: Icon(Icons.add_circle),
-                    ),
-                    Text('Month')
-                  ],
-                )),
-          ]);
 }

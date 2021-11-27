@@ -26,7 +26,7 @@ class _TimeScaletypeState extends State<TimeScaletype> {
     return Container(
       //margin: const EdgeInsets.all(10),
       alignment: Alignment.center,
-      width: widget.state ? 1.2 * widget.width : widget.width,
+      width: widget.state ? widget.width : 0.9*widget.width,
       height: widget.size.height * 0.05,
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.only(

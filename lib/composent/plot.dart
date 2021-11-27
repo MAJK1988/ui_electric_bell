@@ -10,8 +10,12 @@ import 'package:ui_electric_bell/constants.dart';
 
  class Plot extends StatefulWidget {
    final Size size;
+   final bool plotTwoLine;
+   final double requiredPower;
   
-  const Plot({ Key? key ,required this.size}) : super(key: key);
+  const Plot({ Key? key ,required this.size, required this.plotTwoLine, required this.requiredPower}) : super(key: key);
+
+ 
 
   @override
   _PlotState createState() => _PlotState();
@@ -22,17 +26,20 @@ class _PlotState extends State<Plot> {
   late TooltipBehavior _tooltipBehavior;
   late ZoomPanBehavior _zoomPanBehavior;
   late SelectionBehavior _selectionBehavior;
-  late int indexData;
+  
   late String graphTitle;
 
   @override
   void initState() {
+    for (var j = 0; j < stateTileScaler.length; j++) {
+        stateTileScaler[j] = false;
+      }
     stateTileScaler[0] = true;
-    indexData = 0;
     graphTitle = "Hour";
     _zoomPanBehavior = ZoomPanBehavior(
       enablePinching: true,
-      zoomMode: ZoomMode.x,
+      zoomMode: ZoomMode.xy,
+
       enablePanning: true,
     );
     _selectionBehavior = SelectionBehavior(
@@ -55,30 +62,30 @@ class _PlotState extends State<Plot> {
       }
       stateTileScaler[i] = true;
       graphTitle = timeScalerSlectedString[i];
-      indexData = i;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    double width=widget.size.width * 0.9;
     return  Padding(
             padding: const EdgeInsets.only(
                 top: kDefaultPadding * 2,
                 right: kDefaultPadding,
                 left: kDefaultPadding,
-                bottom: kDefaultPadding),
+                bottom: kDefaultPadding/2),
             child:Container(
                 alignment: Alignment.bottomLeft,
                 height: widget.size.height * 0.5,
-                width: widget.size.width * 0.9,
+                width:width ,
                 decoration: getBoxDecoration(kBackgroundColor),
                 child: Stack(
                   children: [
                     Positioned(
-                      top: 10,
+                      top: 5,
                       left: 10,
                       child: SizedBox(
-                        width: widget.size.width * 0.9-20,
+                        width: 0.9*width,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
@@ -89,8 +96,8 @@ class _PlotState extends State<Plot> {
                                 },
                                 child: TimeScaletype(
                                   state: stateTileScaler[i - 1],
-                                  width: widget.size.width *
-                                      (1 / (stateTileScaler.length + 3)),
+                                  width:(width-20)*
+                                      (1 / (stateTileScaler.length +1)),
                                   size: widget.size,
                                   positionRight: 0.0,
                                   timeScale: timeScalerSlectedString[i - 1],
@@ -101,13 +108,18 @@ class _PlotState extends State<Plot> {
                       ),
                     ),
                     Positioned(
-                      top: 50,
+                      top: widget.size.height*0.015,
                       child: Container(
                         margin: const EdgeInsets.all(15),
                         width: widget.size.width * 0.85,
+                        height: widget.size.height *0.47,
                         padding: const EdgeInsets.only(top: kDefaultPadding),
                         child:SfCartesianChart(
                             // Initialize category axis
+                            legend: Legend(
+                              isVisible:widget.plotTwoLine,
+                              position:LegendPosition.top,
+                            ),
                             primaryXAxis: CategoryAxis(
                                 labelStyle: const TextStyle(
                                     fontSize: 12,
@@ -122,8 +134,12 @@ class _PlotState extends State<Plot> {
                                   color: Colors.black,
                                   width: 2,
                                 )),
-                            legend: Legend(),
+
+                            
+                            
                             primaryYAxis: NumericAxis(
+                              
+                              plotOffset: 0,
                               labelStyle: const TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold,
@@ -140,7 +156,7 @@ class _PlotState extends State<Plot> {
                             series: <
                                 LineSeries<ConsomeElectricPowerData, String>>[
                               LineSeries<ConsomeElectricPowerData, String>(
-                                  dataSource: data[indexData],
+                                  dataSource: data[stateTileScaler.indexOf(true)],
                                   //selectionBehavior: _selectionBehavior,
                                   xValueMapper:
                                       (ConsomeElectricPowerData sales, _) =>
@@ -150,9 +166,28 @@ class _PlotState extends State<Plot> {
                                           sales.consumerFate,
                                   width: 2,
                                   color: kPrimaryColor,
-                                  name: 'Elecrec consome',
+                                  name: 'Average',
                                   markerSettings:
-                                      const MarkerSettings(isVisible: true))
+                                      const MarkerSettings(isVisible: true)),
+                                      /******************************************** */
+
+                                      if (widget.plotTwoLine)
+                                      LineSeries<ConsomeElectricPowerData, String>(
+                                        
+                                  dataSource:getRequiredline( data[stateTileScaler.indexOf(true)],dataType[stateTileScaler.indexOf(true)],widget.requiredPower),
+                                  
+                                  //selectionBehavior: _selectionBehavior,
+                                  xValueMapper:
+                                      (ConsomeElectricPowerData sales, _) =>
+                                          sales.time,
+                                  yValueMapper:
+                                      (ConsomeElectricPowerData sales, _) =>
+                                          sales.consumerFate,
+                                  width: 2,
+                                  //color: kPrimaryColor,
+                                  name: 'Required',
+                                  markerSettings:
+                                      const MarkerSettings(isVisible: true)),
                             ]),
                       ),
                     )

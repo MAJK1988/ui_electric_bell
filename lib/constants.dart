@@ -32,6 +32,16 @@ class ConsomeElectricPowerData {
                     borderRadius: const BorderRadius.all(Radius.circular(30)),
                     color: colorBackGround);
   }
+
+  class ChartSampleData {
+  String? period;
+  double?  average;
+  double?  required_;
+  
+  ChartSampleData({this.period, this.average,this.required_});
+   }
+
+   
 List<ConsomeElectricPowerData> hourConsumerData = [
   ConsomeElectricPowerData("00", 0.001),
   ConsomeElectricPowerData("01", 0.101),
@@ -121,3 +131,65 @@ List<List<ConsomeElectricPowerData>> data = [
   weekConsumerData,
   monthConsumerData
 ];
+
+List<int> dataType=[ hourConsumerData.length,
+  dayConsumerData.length,
+  weekConsumerData.length,
+  monthConsumerData.length];
+
+
+ double getSomme(List<ConsomeElectricPowerData> data){
+  double result=0;
+  for (ConsomeElectricPowerData consumer in data ){
+      result+=consumer.consumerFate;
+  }
+  return result;
+
+} 
+
+
+double getAverage(List<ConsomeElectricPowerData> data){
+  
+  return getSomme(data)/data.length;
+
+}
+
+double averageDay=getAverage(dayConsumerData);
+double averageWeek=averageDay*7;//getAverage(weekConsumerData);
+double averageMonth=averageDay*30;//getAverage(monthConsumerData);
+
+
+List<double> getCoefficientAverage( List<ConsomeElectricPowerData> data ){
+  double somme = getSomme(data);
+  List<double> coeffition=[];
+  for (ConsomeElectricPowerData consumer in data){
+    coeffition.add(consumer.consumerFate/somme);
+  }
+return coeffition;
+}
+
+ List<ConsomeElectricPowerData> getRequiredline( List<ConsomeElectricPowerData> average, int length, double requiredPower){
+   // length is 24 function return the list of consumer in one day per hour
+   //length is 7 function return the list of consumer in one week per day
+   //length is 30 function return the list of consumer in one month per day
+   List<double> coeffition=getCoefficientAverage(average);
+   List<ConsomeElectricPowerData> result=[];
+   
+   for(int i=0;i< coeffition.length;i++){
+     if (length==hourConsumerData.length){
+       result.add(ConsomeElectricPowerData(average[i].time,coeffition[i]*requiredPower));
+   } else if(length==dayConsumerData.length){
+       result.add(ConsomeElectricPowerData(average[i].time,coeffition[i]*requiredPower*length));
+   }
+   else if(length==weekConsumerData.length){
+       result.add(ConsomeElectricPowerData(average[i].time,coeffition[i]*7*requiredPower*length));
+   }
+
+   else if(length==monthConsumerData.length){
+       result.add(ConsomeElectricPowerData(average[i].time,coeffition[i]*requiredPower*30*length));
+   }
+
+   
+   }
+   return result;
+ }
