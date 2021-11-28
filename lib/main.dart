@@ -4,6 +4,8 @@ import 'package:ui_electric_bell/composent/my_home_page_state.dart';
 import 'package:ui_electric_bell/constants.dart';
 import 'package:ui_electric_bell/setting/fixation_threshold.dart';
 
+import 'composent/home_page.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -23,7 +25,7 @@ class _MyAppState extends State<MyApp> {
       title: 'EPM Home Page',
       routes: {
         // When navigating to the "/" route, build the FirstScreen widget.
-        '/': (context) => const MyHomePage(title: 'Flutter Demo Home Page'),
+        '/': (context) =>const HomePage(),//const MyHomePage(title: 'Flutter Demo Home Page'),
         '/settings': (context) => const FixationOfThreshold(),
       },
       theme: ThemeData(

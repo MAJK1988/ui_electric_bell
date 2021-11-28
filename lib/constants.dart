@@ -32,16 +32,7 @@ class ConsomeElectricPowerData {
                     borderRadius: const BorderRadius.all(Radius.circular(30)),
                     color: colorBackGround);
   }
-
-  class ChartSampleData {
-  String? period;
-  double?  average;
-  double?  required_;
-  
-  ChartSampleData({this.period, this.average,this.required_});
-   }
-
-   
+ 
 List<ConsomeElectricPowerData> hourConsumerData = [
   ConsomeElectricPowerData("00", 0.001),
   ConsomeElectricPowerData("01", 0.101),
@@ -193,3 +184,52 @@ return coeffition;
    }
    return result;
  }
+
+
+
+ class AppliancesInfo {
+  String? name;
+  String?  imagePath;
+  String?  lastActivation;
+  bool? status;
+  
+  AppliancesInfo({
+    required this.status,
+    required this.name, 
+    required this.imagePath,
+    required this.lastActivation});
+   }
+
+
+  class ChartSampleData {
+  String? period;
+  double?  average;
+  double?  required_;
+  
+  ChartSampleData({this.period, this.average,this.required_});
+   }
+ List<AppliancesInfo> appliances=[
+    AppliancesInfo(status: true,name:"Air Conditioner", lastActivation: 'On for last 3 Hours',imagePath:'assets/images/airconditioner.png'),
+    AppliancesInfo(status: true,name:"Smart Light", lastActivation: 'On for last 5 Hours',imagePath:'assets/images/lightbulbon.png'),
+    AppliancesInfo(status: true,name:"Refrigerator", lastActivation: 'On for last s days',imagePath:'assets/images/kitchen.png'),
+
+ ];
+
+
+  class Room {
+  String? name;
+  String?  iconsPath;
+  bool?  status; 
+  Room({required this.name, required this.iconsPath, required this.status});}
+
+  List<Room> rooms=[
+    Room(name:'Toilets',iconsPath: 'assets/icons/bathtub.svg',status:true),
+    Room(name:'Living Room',iconsPath: 'assets/icons/sofa.svg',status:true),
+    Room(name:'Kitchen',iconsPath: 'assets/icons/kitchen.svg',status:true),
+    Room(name:'BedRoom',iconsPath: 'assets/icons/bed.svg',status:true),
+
+
+  ];
+
+
+
