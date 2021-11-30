@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-const kPrimaryColor = Color(0xff0c9869);
+Color kPrimaryColor =Color(0xFF1565C0);// Colors.blue;//Color(0xff0c9869);
 const kTextColor = Color(0xff3c4046);
-const kBackgroundColor = Color(0xfff9f0fd);
+Color kBackgroundColor = Color(0xfff9f0fd);
 const kDefaultPadding = 20.0;
 const kColoryellow = Color(0xFFFFFFFF);
 

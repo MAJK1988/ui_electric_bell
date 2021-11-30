@@ -36,7 +36,7 @@ class _PositionDataShowState extends State<PositionDataShow>{
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children:<Widget> [
 
-                Text(widget.title,textAlign: TextAlign.justify,style:const TextStyle(
+                Text(widget.title,textAlign: TextAlign.justify,style: TextStyle(
                   color:kPrimaryColor,fontSize: 18,
                 fontWeight:FontWeight.w500,
                 )),

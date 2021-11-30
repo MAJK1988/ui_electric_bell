@@ -40,7 +40,7 @@ class _TitleSectionState extends State<TitleSection> {
                 right:10,
                 child: Text(
                     widget.valeur,
-                    style: const TextStyle(fontSize: 20, 
+                    style:  TextStyle(fontSize: 20, 
                     fontWeight: FontWeight.bold,
                     color:kPrimaryColor),
                   ),

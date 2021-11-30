@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ui_electric_bell/composent/my_home_page_state.dart';
 import 'package:ui_electric_bell/constants.dart';
 import 'package:ui_electric_bell/setting/fixation_threshold.dart';
+import 'package:ui_electric_bell/welcome/home_welcome.dart';
 
 import 'composent/home_page.dart';
 
@@ -25,7 +26,8 @@ class _MyAppState extends State<MyApp> {
       title: 'EPM Home Page',
       routes: {
         // When navigating to the "/" route, build the FirstScreen widget.
-        '/': (context) =>const HomePage(),//const MyHomePage(title: 'Flutter Demo Home Page'),
+        '/': (context) =>const HomeWelcome(title: 'Welcome Screen Demo'),
+        '/home': (context) =>const HomePage(),//const MyHomePage(title: 'Flutter Demo Home Page'),
         '/settings': (context) => const FixationOfThreshold(),
         '/show_details': (context) => const MyHomePage(title: 'Flutter Demo Home Page'),
       },

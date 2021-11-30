@@ -69,11 +69,7 @@ class _PlotState extends State<Plot> {
   Widget build(BuildContext context) {
     double width=widget.size.width * 0.9;
     return  Padding(
-            padding: const EdgeInsets.only(
-                top: kDefaultPadding * 2,
-                right: kDefaultPadding,
-                left: kDefaultPadding,
-                bottom: kDefaultPadding/2),
+            padding: getEdgeInsets(),
             child:Container(
                 alignment: Alignment.bottomLeft,
                 height: widget.size.height * 0.5,
@@ -121,13 +117,13 @@ class _PlotState extends State<Plot> {
                               position:LegendPosition.top,
                             ),
                             primaryXAxis: CategoryAxis(
-                                labelStyle: const TextStyle(
+                                labelStyle:  TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.bold,
                                     color: kPrimaryColor),
                                 title: AxisTitle(
                                     text: "Per $graphTitle",
-                                    textStyle: const TextStyle(
+                                    textStyle:  TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: kPrimaryColor)),
                                 axisLine: const AxisLine(
@@ -140,7 +136,7 @@ class _PlotState extends State<Plot> {
                             primaryYAxis: NumericAxis(
                               
                               plotOffset: 0,
-                              labelStyle: const TextStyle(
+                              labelStyle:  TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold,
                                   color: kPrimaryColor),

@@ -47,7 +47,7 @@ class _StateElectrictyConsumption extends State<ElectrictyConsumption>{
                     GaugeAnnotation(widget: Padding(
                       padding: const EdgeInsets.only(top:35.0),
                       child: Text('${widget.value}',
-                      style:const TextStyle(fontSize: 12,fontWeight:FontWeight.bold,color: kPrimaryColor,)),
+                      style: TextStyle(fontSize: 12,fontWeight:FontWeight.bold,color: kPrimaryColor,)),
                     ),
                         angle: 90,positionFactor: 0.5)]
                 )]

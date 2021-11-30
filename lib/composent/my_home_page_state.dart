@@ -36,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
           PopupMenuButton(
             icon:const Icon(Icons.more_vert),
             itemBuilder: (BuildContext context) => <PopupMenuEntry>[
-             const  PopupMenuItem(
+               PopupMenuItem(
                 child:  ListTile(
                   
                   leading:  Icon(Icons.settings,color: kPrimaryColor,),
@@ -46,11 +46,11 @@ class _MyHomePageState extends State<MyHomePage> {
                PopupMenuItem(
                 child: ListTile(
                   onTap: (){Navigator.pushNamed(context, '/settings');},
-                  leading:const  Icon(Icons.anchor,color: kPrimaryColor,),
-                  title: const Text('Fixation a threshold',style: TextStyle(color:kPrimaryColor,fontSize: 15,fontWeight:FontWeight.bold)),
+                  leading:  Icon(Icons.anchor,color: kPrimaryColor,),
+                  title:  Text('Fixation a threshold',style: TextStyle(color:kPrimaryColor,fontSize: 15,fontWeight:FontWeight.bold)),
                 ),
               ),
-              const PopupMenuItem(
+               PopupMenuItem(
                 child: ListTile(
                   leading: Icon(Icons.person,color: kPrimaryColor,),
                   title: Text('Your account',style: TextStyle(color:kPrimaryColor,fontSize: 15,fontWeight:FontWeight.bold)),
@@ -84,8 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
 
-          Plot(size: size,plotTwoLine: false,requiredPower: 0),// Plot the electric power consumer
-           
+          
             Padding(
               padding: const EdgeInsets.only(
                   top: kDefaultPadding ,
@@ -150,7 +149,8 @@ class _MyHomePageState extends State<MyHomePage> {
            
 
 
-
+        Plot(size: size,plotTwoLine: false,requiredPower: 0),// Plot the electric power consumer
+           
 
         ],
       )),

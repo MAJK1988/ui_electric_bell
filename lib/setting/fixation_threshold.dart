@@ -117,7 +117,7 @@ late ChartSampleData dataDaily= ChartSampleData(
                      border: const OutlineInputBorder(
                        borderSide: BorderSide.none
                        ),
-                       hintStyle:const TextStyle(color: kPrimaryColor),
+                       hintStyle: TextStyle(color: kPrimaryColor),
                        hintText: "Enter the amount you want to spend",
                        ),)),
               OutlinedButton(
@@ -148,7 +148,7 @@ late ChartSampleData dataDaily= ChartSampleData(
                       _showToast();
                   }
                 },
-                child:const Text("SHOW THE COMPERSON!!",style: TextStyle(color: kPrimaryColor),),),
+                child: Text("SHOW THE COMPERSON!!",style: TextStyle(color: kPrimaryColor),),),
               if (showComperasons)...[
               Comperson(size: size,title: 'Daily Comperson',data:dataDaily),
               Comperson(size: size,title: 'Weekly Comperson',data:dataWeekly),
