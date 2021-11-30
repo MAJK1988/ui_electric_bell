@@ -134,11 +134,11 @@ class _StateBillInforShow extends State<BillInforShow>{
                       ),
 
                       RaisedButton(
-                        onPressed: (){},
+                        onPressed: (){Navigator.pushNamed(context, '/show_details');},
                         color:const Color.fromRGBO(26, 141, 255,1),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
 
-                        child:const Text("Pay Bill",
+                        child:const Text("Show details",
                           style: TextStyle(
                               fontSize: 14,
                               color: Color.fromRGBO(255, 255, 255,1)

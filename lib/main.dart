@@ -27,6 +27,7 @@ class _MyAppState extends State<MyApp> {
         // When navigating to the "/" route, build the FirstScreen widget.
         '/': (context) =>const HomePage(),//const MyHomePage(title: 'Flutter Demo Home Page'),
         '/settings': (context) => const FixationOfThreshold(),
+        '/show_details': (context) => const MyHomePage(title: 'Flutter Demo Home Page'),
       },
       theme: ThemeData(
         backgroundColor: kBackgroundColor,

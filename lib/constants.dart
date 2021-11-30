@@ -215,6 +215,12 @@ return coeffition;
 
  ];
 
+ EdgeInsets getEdgeInsets(){return const  EdgeInsets.only(
+                top: kDefaultPadding / 2,
+                right: kDefaultPadding,
+                left: kDefaultPadding,
+                bottom: kDefaultPadding/2);}
+
 
   class Room {
   String? name;

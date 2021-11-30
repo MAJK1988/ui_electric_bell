@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:ui_electric_bell/composent/electricty_consumption.dart';
 import 'package:ui_electric_bell/composent/plot.dart';
 import 'package:ui_electric_bell/composent/position_data_show.dart';
 import 'package:ui_electric_bell/composent/time_scale_type.dart';
@@ -63,9 +64,28 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SingleChildScrollView(
           child: Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: TitleSection( title: "Counter: ",
+            size: size,valeur:valeur),
+          ),
+
+          Padding(
+              padding: getEdgeInsets(),
+              child:Container(
+            decoration: getBoxDecoration(kBackgroundColor),
+            child:  Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ElectrictyConsumption(max:150,size: size,value: 60,title: 'Today consumption'),
+                  ElectrictyConsumption(max:350,size: size,value: 200,title: 'Overall consumption'),
+                ],
+              ),
+            ),
+          ),
+
           Plot(size: size,plotTwoLine: false,requiredPower: 0),// Plot the electric power consumer
-           TitleSection( title: "Counter: ",
-          size: size,valeur:valeur),
+           
             Padding(
               padding: const EdgeInsets.only(
                   top: kDefaultPadding ,
