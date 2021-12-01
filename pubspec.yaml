@@ -41,6 +41,10 @@ dependencies:
   intl: ^0.17.0
   flutter_svg: ^0.23.0+1
   syncfusion_flutter_gauges: ^19.3.55
+  firebase_core: ^1.10.0
+  firebase_auth: ^3.2.0
+  auto_size_text_field: ^1.0.1
+ 
   
 
 dev_dependencies:
@@ -71,6 +75,9 @@ flutter:
     - data/flutter.db
     - assets/images/
     - assets/icons/
+    - assets/images/main_top.png
+    - assets/images/img.png
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
