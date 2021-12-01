@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:ui_electric_bell/auth/Screens/Welcome/welcome_screen.dart';
 import 'package:ui_electric_bell/composent/home_page.dart';
 import 'package:ui_electric_bell/constants.dart';
 
@@ -131,7 +132,7 @@ class _HomeWelcomeState extends State<HomeWelcome> {
                         onPressed: () {
                           setState(() {Navigator.pushAndRemoveUntil( 
                             context,MaterialPageRoute(
-                              builder: (context) =>const HomePage()),
+                              builder: (context) =>const WelcomeScreen()),
                               (Route<dynamic> route) => false,
                               );});
                         },

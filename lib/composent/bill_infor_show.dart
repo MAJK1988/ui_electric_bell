@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ui_electric_bell/constants.dart';
 
+import 'my_home_page_state.dart';
+
 class BillInforShow extends StatefulWidget{
   final Size size;
   final String limitedDay;
@@ -134,7 +136,13 @@ class _StateBillInforShow extends State<BillInforShow>{
                       ),
 
                       RaisedButton(
-                        onPressed: (){Navigator.pushNamed(context, '/show_details');},
+                        onPressed: (){//Navigator.pushNamed(context, '/show_details');
+                        Navigator.push(context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const MyHomePage(title:'Show bill details');
+                            },),);
+                        },
                         color:const Color.fromRGBO(26, 141, 255,1),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
 

@@ -6,7 +6,7 @@ import 'package:ui_electric_bell/constants.dart';
 import 'package:ui_electric_bell/setting/comparison.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
-GlobalKey globalKey = GlobalKey();
+
 class FixationOfThreshold extends StatefulWidget{
   const FixationOfThreshold({Key? key}) : super(key: key);
 
@@ -148,7 +148,7 @@ late ChartSampleData dataDaily= ChartSampleData(
                       _showToast();
                   }
                 },
-                child: Text("SHOW THE COMPERSON!!",style: TextStyle(color: kPrimaryColor),),),
+                child: const Text("SHOW THE COMPERSON!!",style: TextStyle(color: kPrimaryColor),),),
               if (showComperasons)...[
               Comperson(size: size,title: 'Daily Comperson',data:dataDaily),
               Comperson(size: size,title: 'Weekly Comperson',data:dataWeekly),

@@ -1,12 +1,12 @@
 
 import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:ui_electric_bell/auth/services/auth.dart';
 import 'package:ui_electric_bell/composent/electricty_consumption.dart';
 import 'package:ui_electric_bell/composent/plot.dart';
 import 'package:ui_electric_bell/composent/position_data_show.dart';
-import 'package:ui_electric_bell/composent/time_scale_type.dart';
 import 'package:ui_electric_bell/composent/titleSection.dart';
 import 'package:ui_electric_bell/constants.dart';
+import 'package:ui_electric_bell/setting/fixation_threshold.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -18,6 +18,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  
+
 
  
 
@@ -36,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
           PopupMenuButton(
             icon:const Icon(Icons.more_vert),
             itemBuilder: (BuildContext context) => <PopupMenuEntry>[
-               PopupMenuItem(
+              const PopupMenuItem(
                 child:  ListTile(
                   
                   leading:  Icon(Icons.settings,color: kPrimaryColor,),
@@ -45,15 +47,22 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
                PopupMenuItem(
                 child: ListTile(
-                  onTap: (){Navigator.pushNamed(context, '/settings');},
-                  leading:  Icon(Icons.anchor,color: kPrimaryColor,),
-                  title:  Text('Fixation a threshold',style: TextStyle(color:kPrimaryColor,fontSize: 15,fontWeight:FontWeight.bold)),
+                  onTap: (){//Navigator.pushNamed(context, '/settings');
+                   Navigator.push(context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const FixationOfThreshold();
+                            },),);
+                  },
+                  leading:const  Icon(Icons.anchor,color: kPrimaryColor,),
+                  title:const  Text('Fixation a threshold',style: TextStyle(color:kPrimaryColor,fontSize: 15,fontWeight:FontWeight.bold)),
                 ),
               ),
                PopupMenuItem(
                 child: ListTile(
-                  leading: Icon(Icons.person,color: kPrimaryColor,),
-                  title: Text('Your account',style: TextStyle(color:kPrimaryColor,fontSize: 15,fontWeight:FontWeight.bold)),
+                  onTap:() {FireAuth.logOut(context: context);},
+                  leading:const Icon(Icons.person,color: kPrimaryColor,),
+                  title:const Text('Your account',style: TextStyle(color:kPrimaryColor,fontSize: 15,fontWeight:FontWeight.bold)),
                 ),
               ),
              

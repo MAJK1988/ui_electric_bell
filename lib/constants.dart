@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Color kPrimaryColor =Color(0xFF1565C0);// Colors.blue;//Color(0xff0c9869);
+const kPrimaryColor =Color(0xFF1565C0);// Colors.blue;//Color(0xff0c9869);
 const kTextColor = Color(0xff3c4046);
 Color kBackgroundColor = Color(0xfff9f0fd);
 const kDefaultPadding = 20.0;
 const kColoryellow = Color(0xFFFFFFFF);
+const kPrimaryLightColor = Color(0xFFF1E6FF);
 
 List<String> timeScalerSlectedString = ["Hour", "Day", "Week", "Month"];
 List<bool> stateTileScaler =
@@ -186,7 +187,7 @@ return coeffition;
  }
 
 
-
+/* AppliancesInfo class */
  class AppliancesInfo {
   String? name;
   String?  imagePath;
@@ -199,7 +200,67 @@ return coeffition;
     required this.imagePath,
     required this.lastActivation});
    }
+  AppliancesInfo dish_washer=AppliancesInfo(status: true,
+                   name:"Dish washer", 
+                   lastActivation: 'On for last 1 Hours',
+                   imagePath:'assets/icons/dish_washer.svg');
 
+  AppliancesInfo Refrigerator=AppliancesInfo(status: true,
+                   name:"Refrigerator", 
+                   lastActivation: 'On for last 7 days',
+                   imagePath:'assets/icons/refrigerator.svg');
+
+  AppliancesInfo coffee_maker=AppliancesInfo(status: false,
+                   name:"Coffee maker", 
+                   lastActivation: 'Off for last 1 days',
+                   imagePath:'assets/icons/coffee_maker.svg');
+
+  AppliancesInfo gas_stove=AppliancesInfo(status: true,
+                   name:"Gas stove", 
+                   lastActivation: 'On for last 1 hour',
+                   imagePath:'assets/icons/gas_stove.svg');
+    
+  AppliancesInfo microwave=AppliancesInfo(status: true,
+                   name:"Microwave", 
+                   lastActivation: 'On for last 1 hour',
+                   imagePath:'assets/icons/microwave.svg');
+
+  AppliancesInfo rice_cooker=AppliancesInfo(status: false,
+                   name:"Rice cooker", 
+                   lastActivation: 'Off for last 0.3 hour',
+                   imagePath:'assets/icons/rice_cooker.svg');
+  
+  AppliancesInfo light=AppliancesInfo(status: true,
+                   name:"Light", 
+                   lastActivation: 'On for last 2 hour',
+                   imagePath:'assets/icons/light.svg');
+
+  AppliancesInfo tv=AppliancesInfo(status: false,
+                   name:"TV", 
+                   lastActivation: 'Off for last 2 hour',
+                   imagePath:'assets/icons/tv.svg');
+
+  AppliancesInfo air_conditioner=AppliancesInfo(status: true,
+                   name:"Air conditioner", 
+                   lastActivation: 'On for last 4 hour',
+                   imagePath:'assets/icons/air_conditioner.svg');
+
+  AppliancesInfo water_heater=AppliancesInfo(status: false,
+                   name:"Water heater", 
+                   lastActivation: 'Off for last 1.3 hour',
+                   imagePath:'assets/icons/water_heater.svg');  
+
+  AppliancesInfo blow_dryer=AppliancesInfo(status: true,
+                   name:"Blow dryer", 
+                   lastActivation: 'On for last 1 hour',
+                   imagePath:'assets/icons/blow_dryer.svg');
+
+  AppliancesInfo washing_machine=AppliancesInfo(status: true,
+                   name:"Washing machine", 
+                   lastActivation: 'On for last 0.6 hour',
+                   imagePath:'assets/icons/washing_machine.svg'); 
+
+                              
 
   class ChartSampleData {
   String? period;
@@ -208,10 +269,23 @@ return coeffition;
   
   ChartSampleData({this.period, this.average,this.required_});
    }
+
+
  List<AppliancesInfo> appliances=[
-    AppliancesInfo(status: true,name:"Air Conditioner", lastActivation: 'On for last 3 Hours',imagePath:'assets/images/airconditioner.png'),
-    AppliancesInfo(status: true,name:"Smart Light", lastActivation: 'On for last 5 Hours',imagePath:'assets/images/lightbulbon.png'),
-    AppliancesInfo(status: true,name:"Refrigerator", lastActivation: 'On for last s days',imagePath:'assets/images/kitchen.png'),
+    AppliancesInfo(status: true,
+                   name:"Air Conditioner", 
+                   lastActivation: 'On for last 3 Hours',
+                   imagePath:'assets/images/airconditioner.png'),
+
+    AppliancesInfo(status: true,
+                   name:"Smart Light", 
+                   lastActivation: 'On for last 5 Hours',
+                   imagePath:'assets/images/lightbulbon.png'),
+
+    AppliancesInfo(status: true,
+                   name:"Refrigerator",
+                   lastActivation: 'On for last s days',
+                   imagePath:'assets/images/kitchen.png'),
 
  ];
 
@@ -221,20 +295,83 @@ return coeffition;
                 left: kDefaultPadding,
                 bottom: kDefaultPadding/2);}
 
-
+/* Room class*/
   class Room {
   String? name;
   String?  iconsPath;
   bool?  status; 
-  Room({required this.name, required this.iconsPath, required this.status});}
+  double? temperature;
+  double? humidity;
+
+  setHumidity(double humidity){
+    this.humidity=humidity;
+  }
+
+  setTemperature(double temperature){
+    this.temperature=temperature;
+  }
+
+  setStatus(bool status){
+    this.status=status;
+  }
+
+
+  List<AppliancesInfo> appliances;
+
+  Room({required this.name, 
+       required this.iconsPath, 
+       required this.status, 
+       required this.temperature, 
+       required this.humidity, 
+       required this.appliances});
+  
+  }
+ 
 
   List<Room> rooms=[
-    Room(name:'Toilets',iconsPath: 'assets/icons/bathtub.svg',status:true),
-    Room(name:'Living Room',iconsPath: 'assets/icons/sofa.svg',status:true),
-    Room(name:'Kitchen',iconsPath: 'assets/icons/kitchen.svg',status:true),
-    Room(name:'BedRoom',iconsPath: 'assets/icons/bed.svg',status:true),
+    Room(name:'Toilets',
+         iconsPath: 'assets/icons/bathtub.svg',
+         status:true,
+         temperature: 10,
+         humidity:50,
+         appliances: [
+           water_heater,
+           blow_dryer,
+           light,
+           air_conditioner,
+           washing_machine]),
+
+    Room(name:'Living Room',
+        iconsPath: 'assets/icons/sofa.svg',
+        status:true,
+        temperature: 10,
+         humidity:50,
+         appliances: [tv,
+         air_conditioner,
+         light]),
 
 
+    Room(name:'Kitchen',
+        iconsPath: 'assets/icons/kitchen.svg',
+        status:true,
+        temperature: 10,
+        humidity:50,
+        appliances: [
+          dish_washer,
+          Refrigerator,
+          coffee_maker,
+          gas_stove,
+          microwave,
+          rice_cooker,
+          light]),
+
+    Room(name:'BedRoom',
+         iconsPath: 'assets/icons/bed.svg',
+         status:true,
+         temperature: 10,
+         humidity:50,
+         appliances: [light,
+         air_conditioner]),
   ];
 
 

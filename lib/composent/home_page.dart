@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
  import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:ui_electric_bell/composent/appliances_show.dart';
+import 'package:ui_electric_bell/composent/room_details/room_details.dart';
 import 'package:ui_electric_bell/composent/room_infor_show.dart';
 import '../constants.dart';
 import 'bill_infor_show.dart';
@@ -151,6 +152,11 @@ class _StateHomePage extends State<HomePage>{
                         onTap: (){
                           setState(() {
                             currentRooms=index;
+                            Navigator.push(context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return  RoomDetails(room:rooms[index]);
+                            },),);
                           });
                         },
                         child:RoomInforShow(size: size,
