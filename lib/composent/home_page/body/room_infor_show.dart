@@ -2,7 +2,7 @@
  import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../constants.dart';
+import '../../../constants.dart';
 
 class RoomInforShow extends StatefulWidget{
    final Size size;
@@ -56,7 +56,7 @@ class RoomInforShow extends StatefulWidget{
                                child: SvgPicture.asset(widget.room.iconsPath!,
                                height: widget.size.height*0.12,
                                width: widget.size.width*0.32,
-                               color: Colors.black,
+                               color: Colors.blue,
                                allowDrawingOutsideViewBox: true,),
                              ),
                            ),

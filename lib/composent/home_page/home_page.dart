@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
  import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:ui_electric_bell/composent/appliances_show.dart';
+import 'package:ui_electric_bell/composent/room_details/body/show_appliances.dart';
 import 'package:ui_electric_bell/composent/room_details/room_details.dart';
 import 'package:ui_electric_bell/composent/room_infor_show.dart';
 import '../constants.dart';
@@ -20,6 +21,9 @@ class HomePage extends StatefulWidget{
 class _StateHomePage extends State<HomePage>{
   String GoodMorning='Good evening!';
   String UserName='MAhmoud KADDOUR';
+  
+  List<AppliancesInfo> runningAppliances=getListRunningAppliancse(rooms);
+
   String billPrice='6,458.23';
   String units='562';
   String limitedDay='12 Days';
@@ -107,24 +111,14 @@ class _StateHomePage extends State<HomePage>{
                   ],
                 ),
               ),
-              //running appliances list view
+
               Container(
-                  height: size.height*0.18,
+                  height: size.height*0.24,
                   margin:const EdgeInsets.only(top: 25),
-                  child: ListView(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    physics:const BouncingScrollPhysics(),
-                    children: <Widget>[
-                      //Air conditioner
-                      AppliancesShow(size:size,appliancesInfo:appliances[0]),
-                      //smart Light
-                      AppliancesShow(size:size,appliancesInfo:appliances[1]),
-                      //Refrigerator
-                      AppliancesShow(size:size,appliancesInfo:appliances[2]),
-                    ],
-                  )
+                  child:
+                  ShowAppliances(size: size,appliances:runningAppliances) 
               ),
+              
               // Room list
               Container(
                 alignment: Alignment.topLeft,
@@ -164,17 +158,7 @@ class _StateHomePage extends State<HomePage>{
                         clicked: index==currentRooms) ,
                       );
                     })
-                   /*ListView(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    physics:const BouncingScrollPhysics(),
-                    children: <Widget>[
-                      RoomInforShow(size: size,room:rooms[0]),
-                      RoomInforShow(size: size,room:rooms[1]),
-                      RoomInforShow(size: size,room:rooms[2]),
-                      RoomInforShow(size: size,room:rooms[3]),
-                    ],
-                  )*/
+                 
               ),
 
         ],),

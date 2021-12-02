@@ -8,16 +8,16 @@ import 'package:ui_electric_bell/composent/titleSection.dart';
 import 'package:ui_electric_bell/constants.dart';
 import 'package:ui_electric_bell/setting/fixation_threshold.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+class ShowEnergyConsumption extends StatefulWidget {
+  const ShowEnergyConsumption({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<ShowEnergyConsumption> createState() => _StateShowEnergyConsumption();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _StateShowEnergyConsumption extends State<ShowEnergyConsumption> {
   
 
 

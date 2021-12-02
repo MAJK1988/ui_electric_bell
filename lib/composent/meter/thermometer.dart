@@ -56,34 +56,20 @@ Widget getThermometer(double temperature,double endValue){
                 
               )
             ],
-    axisTrackStyle:const LinearAxisTrackStyle(
+    axisTrackStyle: LinearAxisTrackStyle(
       thickness: 20, 
-      color:Colors.blue,
+      color:Colors.white,
+      borderColor: getColor(temperature),
+      borderWidth:1,
       edgeStyle: LinearEdgeStyle.bothCurve),
 
     
-    /*ranges:  <LinearGaugeRange>[
-      LinearGaugeRange(
-        startValue: 0,
-        endValue: endValue/3,
-        position: LinearElementPosition.outside,
-        color:const Color(0xff0DC9AB)),
-      LinearGaugeRange(
-        startValue: endValue/3,
-        endValue: endValue*(2/3),
-        position: LinearElementPosition.outside,
-        color:const Color(0xffFFC93E)),
-       LinearGaugeRange(
-        startValue: endValue*(2/3),
-        endValue: endValue,
-        position: LinearElementPosition.outside,
-        color:const  Color(0xffF45656)),
-  ],*/
+   
         );
 }
 
 Color getColor(double value){
-  if(value < 12){return const Color(0xff0DC9AB); }
+  if(value < 12){return  Colors.blue; }
   if(value > 12 && value < 38){return const Color(0xffFFC93E); }
   else {return const Color(0xffF45656);}
 }

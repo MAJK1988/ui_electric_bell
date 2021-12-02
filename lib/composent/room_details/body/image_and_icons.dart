@@ -57,15 +57,21 @@ class _StateImageAndIcons extends State<ImageAndIcons>{
                 
                 children:<Widget> [
                   Positioned(
-                    top: height*0.15,
-                    child: Text("${widget.room.name}\n",
-                     style: Theme.of(context)
-                      .textTheme
-                      .headline4!
-                      .copyWith(
-                        color: kTextColor, 
-                        fontWeight: FontWeight.bold),
-                         ),
+                    top: height*0.1,
+                    right: 15,
+                    child: SizedBox(
+                      width:widget.size.width * 0.45,
+                      child: FittedBox(fit:BoxFit.fitWidth,
+                        child: Text("${widget.room.name}\n",
+                         style: Theme.of(context)
+                          .textTheme
+                          .headline4!
+                          .copyWith(
+                            color: kTextColor, 
+                            fontWeight: FontWeight.bold),
+                             ),
+                      ),
+                    ),
                   ),
                   Positioned(
                     bottom: 10,

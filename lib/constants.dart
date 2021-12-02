@@ -193,12 +193,18 @@ return coeffition;
   String?  imagePath;
   String?  lastActivation;
   bool? status;
+  String? roomName;
   
   AppliancesInfo({
     required this.status,
     required this.name, 
     required this.imagePath,
-    required this.lastActivation});
+    required this.lastActivation,
+     this.roomName=''});
+
+     void setRoomName(String roomName){this.roomName=roomName;}
+
+    
    }
   AppliancesInfo dish_washer=AppliancesInfo(status: true,
                    name:"Dish washer", 
@@ -256,7 +262,7 @@ return coeffition;
                    imagePath:'assets/icons/blow_dryer.svg');
 
   AppliancesInfo washing_machine=AppliancesInfo(status: true,
-                   name:"Washing machine", 
+                   name:"Washing", 
                    lastActivation: 'On for last 0.6 hour',
                    imagePath:'assets/icons/washing_machine.svg'); 
 
@@ -335,20 +341,22 @@ return coeffition;
          temperature: 10,
          humidity:50,
          appliances: [
-           water_heater,
-           blow_dryer,
-           light,
-           air_conditioner,
-           washing_machine]),
+           appliancesSetRoomName('Toilets',water_heater),
+           appliancesSetRoomName('Toilets',blow_dryer),
+           appliancesSetRoomName('Toilets',light),
+          appliancesSetRoomName('Toilets', air_conditioner),
+           appliancesSetRoomName('Toilets',washing_machine)
+          ]),
 
     Room(name:'Living Room',
         iconsPath: 'assets/icons/sofa.svg',
         status:true,
         temperature: 10,
          humidity:50,
-         appliances: [tv,
-         air_conditioner,
-         light]),
+         appliances: [
+           appliancesSetRoomName('Living Room',tv),
+          appliancesSetRoomName('Living Room',air_conditioner),
+          appliancesSetRoomName('Living Room',light)]),
 
 
     Room(name:'Kitchen',
@@ -357,22 +365,40 @@ return coeffition;
         temperature: 10,
         humidity:50,
         appliances: [
-          dish_washer,
-          Refrigerator,
-          coffee_maker,
-          gas_stove,
-          microwave,
-          rice_cooker,
-          light]),
+           appliancesSetRoomName('Kitchen',dish_washer),
+          appliancesSetRoomName('Kitchen',Refrigerator),
+          appliancesSetRoomName('Kitchen',coffee_maker),
+          appliancesSetRoomName('Kitchen',gas_stove),
+          appliancesSetRoomName('Kitchen',microwave),
+          appliancesSetRoomName('Kitchen',rice_cooker),
+          appliancesSetRoomName('Kitchen',light)]),
 
     Room(name:'BedRoom',
          iconsPath: 'assets/icons/bed.svg',
          status:true,
          temperature: 10,
          humidity:50,
-         appliances: [light,
-         air_conditioner]),
+         appliances: [
+           appliancesSetRoomName('BedRoom',light),
+         appliancesSetRoomName('BedRoom',air_conditioner)]),
   ];
 
 
 
+List<AppliancesInfo> getListRunningAppliancse(List<Room> rooms){
+  List<AppliancesInfo> runningAppliances=[];
+
+  for (Room room in rooms){
+    for (AppliancesInfo appliance in room.appliances ){
+      if (appliance.status!){
+        runningAppliances.add(appliance);
+      }
+    }
+  }
+  return runningAppliances;
+}
+
+AppliancesInfo appliancesSetRoomName( String roomName, appliance){
+  appliance.setRoomName(roomName);
+  return appliance;
+}
