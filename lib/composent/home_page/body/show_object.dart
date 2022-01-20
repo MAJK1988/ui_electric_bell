@@ -20,7 +20,7 @@ class ShowObject extends StatefulWidget {
 }
 
 class _StateShowObject extends State<ShowObject> {
-  Future<Home> getHome({required DocumentReference<Home> fireHome}) async {
+  getHome({required DocumentReference<Home> fireHome}) async {
     //getHome
     // object: get the saved home in firebase and set in homeConstant
     // input: 1. DocumentReference<Home>
@@ -40,12 +40,17 @@ class _StateShowObject extends State<ShowObject> {
           fromFirestore: (snapshot, _) => Home.fromJson(snapshot.data()!),
           toFirestore: (home, _) => home.toJson(),
         );
+    final fireHomeStream = FirebaseFirestore.instance
+        .collection('User')
+        .doc(widget.user.uid)
+        .snapshots();
 
     return SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
-        child: FutureBuilder<Home>(
-            future: getHome(fireHome: fireHome),
-            builder: (context, AsyncSnapshot<Home> snapshot) {
+        child: StreamBuilder<DocumentSnapshot>(
+            stream: fireHomeStream,
+            builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+              upDate.value = !upDate.value;
               switch (snapshot.connectionState) {
                 case ConnectionState.waiting:
                   return const Center(child: CircularProgressIndicator());
@@ -54,6 +59,9 @@ class _StateShowObject extends State<ShowObject> {
                     return Text('Error: ${snapshot.error}');
                   } else {
                     if (snapshot.data != null) {
+                      Map<String, dynamic> data =
+                          snapshot.data!.data() as Map<String, dynamic>;
+                      homeConstant = Home.fromJson(data);
                       // if snapshot has data go to ShowAllObject class
                       return Column(children: <Widget>[
                         UserInforShow(
@@ -61,12 +69,12 @@ class _StateShowObject extends State<ShowObject> {
                         const Divider(),
                         setTitle(title: "Bill info"),
                         BillInforShow(
-                            size: widget.size, bill: snapshot.data!.bill),
+                            size: widget.size, bill: homeConstant.bill),
                         setTitle(title: "Rooms List"),
                         ShowRoomFirebase(
                           user: widget.user,
                           size: widget.size,
-                          home: snapshot.data!,
+                          home: homeConstant,
                         ),
                       ]);
                     } else {

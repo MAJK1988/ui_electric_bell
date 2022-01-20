@@ -221,3 +221,4 @@ EdgeInsets getEdgeInsets() {
 
 Home homeConstant = Home();
 int currentRooms = -1;
+final ValueNotifier<bool> upDate = ValueNotifier<bool>(false);

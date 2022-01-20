@@ -76,7 +76,7 @@ class _StateShowEnergyConsumption extends State<ShowEnergyConsumption> {
                     Icons.person,
                     color: kPrimaryColor,
                   ),
-                  title: const Text('Your account',
+                  title: const Text('log Out',
                       style: TextStyle(
                           color: kPrimaryColor,
                           fontSize: 15,

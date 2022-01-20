@@ -24,8 +24,6 @@ class SingleApplianceShow extends StatefulWidget {
 class _StateSingleApplianceShow extends State<SingleApplianceShow> {
   @override
   Widget build(BuildContext context) {
-    final ValueNotifier<bool> upDate = ValueNotifier<bool>(false);
-
     final fireHome = FirebaseFirestore.instance
         .collection('User')
         .doc(widget.uid)

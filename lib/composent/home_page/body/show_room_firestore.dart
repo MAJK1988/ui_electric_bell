@@ -24,34 +24,38 @@ class ShowRoomFirebase extends StatefulWidget {
 class _StateShowRoomFirebase extends State<ShowRoomFirebase> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: widget.size.height * 0.22,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: widget.home.rooms.length,
-        itemBuilder: (BuildContext context, index) {
-          return GestureDetector(
-            onTap: () {
-              setState(() {
-                currentRooms = index;
-              });
+    return ValueListenableBuilder<bool>(
+        valueListenable: upDate,
+        builder: (context, bool snapshot, Widget? child) {
+          return SizedBox(
+            height: widget.size.height * 0.22,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: widget.home.rooms.length,
+              itemBuilder: (BuildContext context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      currentRooms = index;
+                    });
 
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ShowRoomInfoFirebase(
-                        room: widget.home.rooms[index].room,
-                        uid: widget.user.uid,
-                        size: widget.size)),
-              );
-            },
-            child: RoomInforShow(
-                size: widget.size,
-                room: widget.home.rooms[index].room,
-                clicked: currentRooms == index),
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ShowRoomInfoFirebase(
+                              room: widget.home.rooms[index].room,
+                              uid: widget.user.uid,
+                              size: widget.size)),
+                    );
+                  },
+                  child: RoomInforShow(
+                      size: widget.size,
+                      room: widget.home.rooms[index].room,
+                      clicked: currentRooms == index),
+                );
+              },
+            ),
           );
-        },
-      ),
-    );
+        });
   }
 }
