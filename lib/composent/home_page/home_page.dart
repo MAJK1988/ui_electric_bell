@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ui_electric_bell/auth/object/home_object.dart';
 import 'package:ui_electric_bell/auth/services/auth.dart';
 
-import 'body/firbase_firestore.dart';
+import 'body/show_object.dart';
 
 import 'body/nav_bar.dart';
 
@@ -46,7 +46,7 @@ class _StateHomePage extends State<HomePage> {
                 } else {
                   var testUser = snapshot.data;
                   if (testUser != null && testUser.uid != '') {
-                    return FirebaseFireStore(size: size, user: testUser);
+                    return ShowObject(size: size, user: testUser);
                   } else {
                     FireAuth.logOut(context: context);
                     return const CircularProgressIndicator();

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:ui_electric_bell/constants.dart';
 
 class UserInforShow extends StatelessWidget {
   final String name;
@@ -10,8 +11,14 @@ class UserInforShow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin:
-            EdgeInsets.only(top: size.height * 0.05, left: size.width * 0.05),
+        alignment: Alignment.center,
+        decoration: getBoxDecoration(kBackgroundColor),
+        margin: EdgeInsets.only(
+            top: size.height * 0.05,
+            left: size.width * 0.055,
+            right: size.width * 0.055,
+            bottom: size.height * 0.01),
+        padding: EdgeInsets.all(size.height * 0.016),
         child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -28,8 +35,10 @@ class UserInforShow extends StatelessWidget {
                     ),
                     Text(
                       name,
-                      style: const TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 0.5), fontSize: 16),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue,
+                          fontSize: size.height * 0.03),
                     )
                   ]),
               /************************* */

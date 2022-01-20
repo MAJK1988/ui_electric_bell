@@ -16,9 +16,24 @@ List<bool> stateTileScaler =
 
 // data class
 class ConsomeElectricPowerData {
-  ConsomeElectricPowerData(this.time, this.consumerFate);
-  final String time;
-  final double consumerFate;
+  ConsomeElectricPowerData({
+    required this.time,
+    required this.consumerFate,
+  });
+  late final String time;
+  late final double consumerFate;
+
+  ConsomeElectricPowerData.fromJson(Map<String, dynamic> json) {
+    time = json['time'];
+    consumerFate = json['consumerFate'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['time'] = time;
+    _data['consumerFate'] = consumerFate;
+    return _data;
+  }
 }
 
 BoxDecoration getBoxDecoration(Color colorBackGround) {
@@ -38,87 +53,87 @@ BoxDecoration getBoxDecoration(Color colorBackGround) {
 }
 
 List<ConsomeElectricPowerData> hourConsumerData = [
-  ConsomeElectricPowerData("00", 0.001),
-  ConsomeElectricPowerData("01", 0.101),
-  ConsomeElectricPowerData("02", 0.101),
-  ConsomeElectricPowerData("03", 0.201),
-  ConsomeElectricPowerData("04", 0.121),
-  ConsomeElectricPowerData("05", 0.158),
-  ConsomeElectricPowerData("06", 0.201),
-  ConsomeElectricPowerData("07", 0.505),
-  ConsomeElectricPowerData("08", 0.607),
-  ConsomeElectricPowerData("09", 1.105),
-  ConsomeElectricPowerData("10", 1.905),
-  ConsomeElectricPowerData("11", 2.102),
-  ConsomeElectricPowerData("12", 3.002),
-  ConsomeElectricPowerData("13", 2.022),
-  ConsomeElectricPowerData("14", 3.001),
-  ConsomeElectricPowerData("15", 3.856),
-  ConsomeElectricPowerData("16", 3.003),
-  ConsomeElectricPowerData("17", 2.158),
-  ConsomeElectricPowerData("18", 1.003),
-  ConsomeElectricPowerData("19", 0.98),
-  ConsomeElectricPowerData("20", 0.9),
-  ConsomeElectricPowerData("21", 0.7),
-  ConsomeElectricPowerData("22", 0.1),
-  ConsomeElectricPowerData("23", 0.02),
+  ConsomeElectricPowerData(time: "00", consumerFate: .001),
+  ConsomeElectricPowerData(time: "01", consumerFate: 0.101),
+  ConsomeElectricPowerData(time: "02", consumerFate: 0.101),
+  ConsomeElectricPowerData(time: "03", consumerFate: 0.201),
+  ConsomeElectricPowerData(time: "04", consumerFate: 0.121),
+  ConsomeElectricPowerData(time: "05", consumerFate: 0.158),
+  ConsomeElectricPowerData(time: "06", consumerFate: 0.201),
+  ConsomeElectricPowerData(time: "07", consumerFate: 0.505),
+  ConsomeElectricPowerData(time: "08", consumerFate: 0.607),
+  ConsomeElectricPowerData(time: "09", consumerFate: 1.105),
+  ConsomeElectricPowerData(time: "10", consumerFate: 1.905),
+  ConsomeElectricPowerData(time: "11", consumerFate: 2.102),
+  ConsomeElectricPowerData(time: "12", consumerFate: 3.002),
+  ConsomeElectricPowerData(time: "13", consumerFate: 2.022),
+  ConsomeElectricPowerData(time: "14", consumerFate: 3.001),
+  ConsomeElectricPowerData(time: "15", consumerFate: 3.856),
+  ConsomeElectricPowerData(time: "16", consumerFate: 3.003),
+  ConsomeElectricPowerData(time: "17", consumerFate: 2.158),
+  ConsomeElectricPowerData(time: "18", consumerFate: 1.003),
+  ConsomeElectricPowerData(time: "19", consumerFate: 0.98),
+  ConsomeElectricPowerData(time: "20", consumerFate: 0.9),
+  ConsomeElectricPowerData(time: "21", consumerFate: 0.7),
+  ConsomeElectricPowerData(time: "22", consumerFate: 0.1),
+  ConsomeElectricPowerData(time: "23", consumerFate: 0.02),
 ];
 
 List<ConsomeElectricPowerData> dayConsumerData = [
-  ConsomeElectricPowerData("11/01", 18.0),
-  ConsomeElectricPowerData("11/02", 19.2),
-  ConsomeElectricPowerData("11/03", 20.1),
-  ConsomeElectricPowerData("11/04", 18.5),
-  ConsomeElectricPowerData("11/05", 19.2),
-  ConsomeElectricPowerData("11/06", 15.2),
-  ConsomeElectricPowerData("11/07", 4.9),
-  ConsomeElectricPowerData("11/08", 3.2),
-  ConsomeElectricPowerData("11/09", 3.201),
-  ConsomeElectricPowerData("11/10", 18.2),
-  ConsomeElectricPowerData("11/11", 19.6),
-  ConsomeElectricPowerData("11/12", 22.2),
-  ConsomeElectricPowerData("11/13", 23.1),
-  ConsomeElectricPowerData("11/14", 13.001),
-  ConsomeElectricPowerData("11/15", 16.856),
-  ConsomeElectricPowerData("11/16", 17.003),
-  ConsomeElectricPowerData("11/17", 18.158),
-  ConsomeElectricPowerData("11/18", 13.003),
-  ConsomeElectricPowerData("11/19", 22.98),
-  ConsomeElectricPowerData("11/20", 20.9),
-  ConsomeElectricPowerData("11/21", 12.7),
-  ConsomeElectricPowerData("11/22", 11.1),
-  ConsomeElectricPowerData("11/23", 23.02),
+  ConsomeElectricPowerData(time: "11/01", consumerFate: 18.0),
+  ConsomeElectricPowerData(time: "11/02", consumerFate: 19.2),
+  ConsomeElectricPowerData(time: "11/03", consumerFate: 20.1),
+  ConsomeElectricPowerData(time: "11/04", consumerFate: 18.5),
+  ConsomeElectricPowerData(time: "11/05", consumerFate: 19.2),
+  ConsomeElectricPowerData(time: "11/06", consumerFate: 15.2),
+  ConsomeElectricPowerData(time: "11/07", consumerFate: 4.9),
+  ConsomeElectricPowerData(time: "11/08", consumerFate: 3.2),
+  ConsomeElectricPowerData(time: "11/09", consumerFate: 3.201),
+  ConsomeElectricPowerData(time: "11/10", consumerFate: 18.2),
+  ConsomeElectricPowerData(time: "11/11", consumerFate: 19.6),
+  ConsomeElectricPowerData(time: "11/12", consumerFate: 22.2),
+  ConsomeElectricPowerData(time: "11/13", consumerFate: 23.1),
+  ConsomeElectricPowerData(time: "11/14", consumerFate: 13.001),
+  ConsomeElectricPowerData(time: "11/15", consumerFate: 16.856),
+  ConsomeElectricPowerData(time: "11/16", consumerFate: 17.003),
+  ConsomeElectricPowerData(time: "11/17", consumerFate: 18.158),
+  ConsomeElectricPowerData(time: "11/18", consumerFate: 13.003),
+  ConsomeElectricPowerData(time: "11/19", consumerFate: 22.98),
+  ConsomeElectricPowerData(time: "11/20", consumerFate: 20.9),
+  ConsomeElectricPowerData(time: "11/21", consumerFate: 12.7),
+  ConsomeElectricPowerData(time: "11/22", consumerFate: 11.1),
+  ConsomeElectricPowerData(time: "11/23", consumerFate: 23.02),
 ];
 
 List<ConsomeElectricPowerData> weekConsumerData = [
-  ConsomeElectricPowerData("11/01", 150.33),
-  ConsomeElectricPowerData("11/07", 120.21),
-  ConsomeElectricPowerData("11/14", 150.33),
-  ConsomeElectricPowerData("11/21", 180.5),
-  ConsomeElectricPowerData("11/28", 132.2),
-  ConsomeElectricPowerData("12/05", 132.2),
-  ConsomeElectricPowerData("11/12", 140.9),
-  ConsomeElectricPowerData("11/19", 130.2),
-  ConsomeElectricPowerData("11/26", 130.201),
-  ConsomeElectricPowerData("12/03", 180.2),
-  ConsomeElectricPowerData("12/10", 119.6),
-  ConsomeElectricPowerData("12/17", 142.2),
-  ConsomeElectricPowerData("12/24", 123.1),
-  ConsomeElectricPowerData("12/30", 130.001),
+  ConsomeElectricPowerData(time: "11/01", consumerFate: 150.33),
+  ConsomeElectricPowerData(time: "11/07", consumerFate: 120.21),
+  ConsomeElectricPowerData(time: "11/14", consumerFate: 150.33),
+  ConsomeElectricPowerData(time: "11/21", consumerFate: 180.5),
+  ConsomeElectricPowerData(time: "11/28", consumerFate: 132.2),
+  ConsomeElectricPowerData(time: "12/05", consumerFate: 132.2),
+  ConsomeElectricPowerData(time: "11/12", consumerFate: 140.9),
+  ConsomeElectricPowerData(time: "11/19", consumerFate: 130.2),
+  ConsomeElectricPowerData(time: "11/26", consumerFate: 130.201),
+  ConsomeElectricPowerData(time: "12/03", consumerFate: 180.2),
+  ConsomeElectricPowerData(time: "12/10", consumerFate: 119.6),
+  ConsomeElectricPowerData(time: "12/17", consumerFate: 142.2),
+  ConsomeElectricPowerData(time: "12/24", consumerFate: 123.1),
+  ConsomeElectricPowerData(time: "12/30", consumerFate: 130.001),
 ];
 List<ConsomeElectricPowerData> monthConsumerData = [
-  ConsomeElectricPowerData("2020/01", 600.33),
-  ConsomeElectricPowerData("2020/02", 590.21),
-  ConsomeElectricPowerData("2020/03", 580.33),
-  ConsomeElectricPowerData("2020/04", 600.5),
-  ConsomeElectricPowerData("2020/05", 632.2),
-  ConsomeElectricPowerData("2020/06", 582.2),
-  ConsomeElectricPowerData("2020/07", 640.9),
-  ConsomeElectricPowerData("2020/08", 590.2),
-  ConsomeElectricPowerData("2020/09", 620.201),
-  ConsomeElectricPowerData("2020/10", 580.2),
-  ConsomeElectricPowerData("2020/11", 559.6),
-  ConsomeElectricPowerData("2020/12", 652.2)
+  ConsomeElectricPowerData(time: "2020/01", consumerFate: 600.33),
+  ConsomeElectricPowerData(time: "2020/02", consumerFate: 590.21),
+  ConsomeElectricPowerData(time: "2020/03", consumerFate: 580.33),
+  ConsomeElectricPowerData(time: "2020/04", consumerFate: 600.5),
+  ConsomeElectricPowerData(time: "2020/05", consumerFate: 632.2),
+  ConsomeElectricPowerData(time: "2020/06", consumerFate: 582.2),
+  ConsomeElectricPowerData(time: "2020/07", consumerFate: 640.9),
+  ConsomeElectricPowerData(time: "2020/08", consumerFate: 590.2),
+  ConsomeElectricPowerData(time: "2020/09", consumerFate: 620.201),
+  ConsomeElectricPowerData(time: "2020/10", consumerFate: 580.2),
+  ConsomeElectricPowerData(time: "2020/11", consumerFate: 559.6),
+  ConsomeElectricPowerData(time: "2020/12", consumerFate: 652.2)
 ];
 List<List<ConsomeElectricPowerData>> data = [
   hourConsumerData,
@@ -170,16 +185,19 @@ List<ConsomeElectricPowerData> getRequiredline(
   for (int i = 0; i < coeffition.length; i++) {
     if (length == hourConsumerData.length) {
       result.add(ConsomeElectricPowerData(
-          average[i].time, coeffition[i] * requiredPower));
+          time: average[i].time, consumerFate: coeffition[i] * requiredPower));
     } else if (length == dayConsumerData.length) {
       result.add(ConsomeElectricPowerData(
-          average[i].time, coeffition[i] * requiredPower * length));
+          time: average[i].time,
+          consumerFate: coeffition[i] * requiredPower * length));
     } else if (length == weekConsumerData.length) {
       result.add(ConsomeElectricPowerData(
-          average[i].time, coeffition[i] * 7 * requiredPower * length));
+          time: average[i].time,
+          consumerFate: coeffition[i] * 7 * requiredPower * length));
     } else if (length == monthConsumerData.length) {
       result.add(ConsomeElectricPowerData(
-          average[i].time, coeffition[i] * requiredPower * 30 * length));
+          time: average[i].time,
+          consumerFate: coeffition[i] * requiredPower * 30 * length));
     }
   }
   return result;

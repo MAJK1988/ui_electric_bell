@@ -9,17 +9,17 @@ import 'package:ui_electric_bell/constants.dart';
 
 import 'show_room_firestore.dart';
 
-class FirebaseFireStore extends StatefulWidget {
+class ShowObject extends StatefulWidget {
   final Size size;
   final UserLocal user;
-  const FirebaseFireStore({Key? key, required this.size, required this.user})
+  const ShowObject({Key? key, required this.size, required this.user})
       : super(key: key);
 
   @override
-  State<FirebaseFireStore> createState() => _StateFirebaseFireStore();
+  State<ShowObject> createState() => _StateShowObject();
 }
 
-class _StateFirebaseFireStore extends State<FirebaseFireStore> {
+class _StateShowObject extends State<ShowObject> {
   Future<Home> getHome({required DocumentReference<Home> fireHome}) async {
     //getHome
     // object: get the saved home in firebase and set in homeConstant
@@ -58,6 +58,7 @@ class _StateFirebaseFireStore extends State<FirebaseFireStore> {
                       return Column(children: <Widget>[
                         UserInforShow(
                             name: widget.user.name, size: widget.size),
+                        const Divider(),
                         setTitle(title: "Bill info"),
                         BillInforShow(
                             size: widget.size, bill: snapshot.data!.bill),

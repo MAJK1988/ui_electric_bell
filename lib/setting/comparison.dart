@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:ui_electric_bell/constants.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 
 class Comperson extends StatefulWidget {
   final Size size;
