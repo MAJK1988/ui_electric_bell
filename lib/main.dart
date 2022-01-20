@@ -1,12 +1,14 @@
+import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:ui_electric_bell/auth/Screens/Welcome/welcome_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ui_electric_bell/constants.dart';
 import 'package:ui_electric_bell/welcome/home_welcome.dart';
 
-import 'composent/home_page.dart';
+import 'composent/home_page/home_page.dart';
+import 'constants.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,7 +16,6 @@ Future<void> main() async {
 }
 
 class MyApp extends StatefulWidget {
-  
   const MyApp({Key? key}) : super(key: key);
 
   @override
@@ -23,6 +24,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final Future<FirebaseApp> _fbApp = Firebase.initializeApp();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -41,11 +43,11 @@ class _MyAppState extends State<MyApp> {
         textTheme: Theme.of(context).textTheme.apply(bodyColor: kTextColor),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-     home: FutureBuilder(
+      home: FutureBuilder(
         future: _fbApp,
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-           // print("you have error");
+            // print("you have error");
             return const Text("Somethong went wrong");
           } else if (snapshot.hasData) {
             return StreamBuilder(
@@ -57,10 +59,11 @@ class _MyAppState extends State<MyApp> {
                     );
                   }
                   final user = snapshot.data;
-                  if (user!= null) {
+
+                  if (user != null) {
                     return const HomePage();
                   } else {
-                    return const HomeWelcome(title: 'Welcome Screen Demo');
+                    return const HomeWelcome(title: 'Welcome');
                   }
                 });
           } else {

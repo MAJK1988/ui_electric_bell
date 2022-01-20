@@ -12,7 +12,7 @@ class _BackgroundState extends State<Background> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Container(
+    return  SizedBox(
       width: double.infinity,
       height: size.height,
       child: Stack(

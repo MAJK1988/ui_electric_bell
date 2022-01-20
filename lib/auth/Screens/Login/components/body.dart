@@ -85,7 +85,8 @@ class _BodyState extends State<Body> {
                   });
                 } else {
                   FireAuth.signInUsingEmailPassword(
-                      email: email, password: passWord, context: context);
+                      email: email, password: passWord, context: context) ;
+
                 }
               },
             ),

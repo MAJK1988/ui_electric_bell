@@ -1,9 +1,11 @@
+//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_electric_bell/auth/object/home_object.dart';
 
-const kPrimaryColor =Color(0xFF1565C0);// Colors.blue;//Color(0xff0c9869);
+const kPrimaryColor = Color(0xFF1565C0); // Colors.blue;//Color(0xff0c9869);
 const kTextColor = Color(0xff3c4046);
-Color kBackgroundColor = Color(0xfff9f0fd);
+Color kBackgroundColor = const Color(0xfff9f0fd);
 const kDefaultPadding = 20.0;
 const kColoryellow = Color(0xFFFFFFFF);
 const kPrimaryLightColor = Color(0xFFF1E6FF);
@@ -18,22 +20,23 @@ class ConsomeElectricPowerData {
   final String time;
   final double consumerFate;
 }
- BoxDecoration getBoxDecoration(Color colorBackGround){
-    return  BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                          offset: const Offset(0, 5),
-                          blurRadius: 5.0,
-                          color: Colors.white.withOpacity(0.23)),
-                      BoxShadow(
-                          offset: const Offset(0, -5),
-                          blurRadius: 2.0,
-                          color: Colors.white.withOpacity(0.23))
-                    ],
-                    borderRadius: const BorderRadius.all(Radius.circular(30)),
-                    color: colorBackGround);
-  }
- 
+
+BoxDecoration getBoxDecoration(Color colorBackGround) {
+  return BoxDecoration(
+      boxShadow: [
+        BoxShadow(
+            offset: const Offset(0, 5),
+            blurRadius: 5.0,
+            color: Colors.white.withOpacity(0.23)),
+        BoxShadow(
+            offset: const Offset(0, -5),
+            blurRadius: 2.0,
+            color: Colors.white.withOpacity(0.23))
+      ],
+      borderRadius: const BorderRadius.all(Radius.circular(30)),
+      color: colorBackGround);
+}
+
 List<ConsomeElectricPowerData> hourConsumerData = [
   ConsomeElectricPowerData("00", 0.001),
   ConsomeElectricPowerData("01", 0.101),
@@ -124,281 +127,79 @@ List<List<ConsomeElectricPowerData>> data = [
   monthConsumerData
 ];
 
-List<int> dataType=[ hourConsumerData.length,
+List<int> dataType = [
+  hourConsumerData.length,
   dayConsumerData.length,
   weekConsumerData.length,
-  monthConsumerData.length];
+  monthConsumerData.length
+];
 
-
- double getSomme(List<ConsomeElectricPowerData> data){
-  double result=0;
-  for (ConsomeElectricPowerData consumer in data ){
-      result+=consumer.consumerFate;
+double getSomme(List<ConsomeElectricPowerData> data) {
+  double result = 0;
+  for (ConsomeElectricPowerData consumer in data) {
+    result += consumer.consumerFate;
   }
   return result;
-
-} 
-
-
-double getAverage(List<ConsomeElectricPowerData> data){
-  
-  return getSomme(data)/data.length;
-
 }
 
-double averageDay=getAverage(dayConsumerData);
-double averageWeek=averageDay*7;//getAverage(weekConsumerData);
-double averageMonth=averageDay*30;//getAverage(monthConsumerData);
+double getAverage(List<ConsomeElectricPowerData> data) {
+  return getSomme(data) / data.length;
+}
 
+double averageDay = getAverage(dayConsumerData);
+double averageWeek = averageDay * 7; //getAverage(weekConsumerData);
+double averageMonth = averageDay * 30; //getAverage(monthConsumerData);
 
-List<double> getCoefficientAverage( List<ConsomeElectricPowerData> data ){
+List<double> getCoefficientAverage(List<ConsomeElectricPowerData> data) {
   double somme = getSomme(data);
-  List<double> coeffition=[];
-  for (ConsomeElectricPowerData consumer in data){
-    coeffition.add(consumer.consumerFate/somme);
+  List<double> coeffition = [];
+  for (ConsomeElectricPowerData consumer in data) {
+    coeffition.add(consumer.consumerFate / somme);
   }
-return coeffition;
+  return coeffition;
 }
 
- List<ConsomeElectricPowerData> getRequiredline( List<ConsomeElectricPowerData> average, int length, double requiredPower){
-   // length is 24 function return the list of consumer in one day per hour
-   //length is 7 function return the list of consumer in one week per day
-   //length is 30 function return the list of consumer in one month per day
-   List<double> coeffition=getCoefficientAverage(average);
-   List<ConsomeElectricPowerData> result=[];
-   
-   for(int i=0;i< coeffition.length;i++){
-     if (length==hourConsumerData.length){
-       result.add(ConsomeElectricPowerData(average[i].time,coeffition[i]*requiredPower));
-   } else if(length==dayConsumerData.length){
-       result.add(ConsomeElectricPowerData(average[i].time,coeffition[i]*requiredPower*length));
-   }
-   else if(length==weekConsumerData.length){
-       result.add(ConsomeElectricPowerData(average[i].time,coeffition[i]*7*requiredPower*length));
-   }
+List<ConsomeElectricPowerData> getRequiredline(
+    List<ConsomeElectricPowerData> average, int length, double requiredPower) {
+  // length is 24 function return the list of consumer in one day per hour
+  //length is 7 function return the list of consumer in one week per day
+  //length is 30 function return the list of consumer in one month per day
+  List<double> coeffition = getCoefficientAverage(average);
+  List<ConsomeElectricPowerData> result = [];
 
-   else if(length==monthConsumerData.length){
-       result.add(ConsomeElectricPowerData(average[i].time,coeffition[i]*requiredPower*30*length));
-   }
-
-   
-   }
-   return result;
- }
-
-
-/* AppliancesInfo class */
- class AppliancesInfo {
-  String? name;
-  String?  imagePath;
-  String?  lastActivation;
-  bool? status;
-  String? roomName;
-  
-  AppliancesInfo({
-    required this.status,
-    required this.name, 
-    required this.imagePath,
-    required this.lastActivation,
-     this.roomName=''});
-
-     void setRoomName(String roomName){this.roomName=roomName;}
-
-    
-   }
-  AppliancesInfo dish_washer=AppliancesInfo(status: true,
-                   name:"Dish washer", 
-                   lastActivation: 'On for last 1 Hours',
-                   imagePath:'assets/icons/dish_washer.svg');
-
-  AppliancesInfo Refrigerator=AppliancesInfo(status: true,
-                   name:"Refrigerator", 
-                   lastActivation: 'On for last 7 days',
-                   imagePath:'assets/icons/refrigerator.svg');
-
-  AppliancesInfo coffee_maker=AppliancesInfo(status: false,
-                   name:"Coffee maker", 
-                   lastActivation: 'Off for last 1 days',
-                   imagePath:'assets/icons/coffee_maker.svg');
-
-  AppliancesInfo gas_stove=AppliancesInfo(status: true,
-                   name:"Gas stove", 
-                   lastActivation: 'On for last 1 hour',
-                   imagePath:'assets/icons/gas_stove.svg');
-    
-  AppliancesInfo microwave=AppliancesInfo(status: true,
-                   name:"Microwave", 
-                   lastActivation: 'On for last 1 hour',
-                   imagePath:'assets/icons/microwave.svg');
-
-  AppliancesInfo rice_cooker=AppliancesInfo(status: false,
-                   name:"Rice cooker", 
-                   lastActivation: 'Off for last 0.3 hour',
-                   imagePath:'assets/icons/rice_cooker.svg');
-  
-  AppliancesInfo light=AppliancesInfo(status: true,
-                   name:"Light", 
-                   lastActivation: 'On for last 2 hour',
-                   imagePath:'assets/icons/light.svg');
-
-  AppliancesInfo tv=AppliancesInfo(status: false,
-                   name:"TV", 
-                   lastActivation: 'Off for last 2 hour',
-                   imagePath:'assets/icons/tv.svg');
-
-  AppliancesInfo air_conditioner=AppliancesInfo(status: true,
-                   name:"Air conditioner", 
-                   lastActivation: 'On for last 4 hour',
-                   imagePath:'assets/icons/air_conditioner.svg');
-
-  AppliancesInfo water_heater=AppliancesInfo(status: false,
-                   name:"Water heater", 
-                   lastActivation: 'Off for last 1.3 hour',
-                   imagePath:'assets/icons/water_heater.svg');  
-
-  AppliancesInfo blow_dryer=AppliancesInfo(status: true,
-                   name:"Blow dryer", 
-                   lastActivation: 'On for last 1 hour',
-                   imagePath:'assets/icons/blow_dryer.svg');
-
-  AppliancesInfo washing_machine=AppliancesInfo(status: true,
-                   name:"Washing", 
-                   lastActivation: 'On for last 0.6 hour',
-                   imagePath:'assets/icons/washing_machine.svg'); 
-
-                              
-
-  class ChartSampleData {
-  String? period;
-  double?  average;
-  double?  required_;
-  
-  ChartSampleData({this.period, this.average,this.required_});
-   }
-
-
- List<AppliancesInfo> appliances=[
-    AppliancesInfo(status: true,
-                   name:"Air Conditioner", 
-                   lastActivation: 'On for last 3 Hours',
-                   imagePath:'assets/images/airconditioner.png'),
-
-    AppliancesInfo(status: true,
-                   name:"Smart Light", 
-                   lastActivation: 'On for last 5 Hours',
-                   imagePath:'assets/images/lightbulbon.png'),
-
-    AppliancesInfo(status: true,
-                   name:"Refrigerator",
-                   lastActivation: 'On for last s days',
-                   imagePath:'assets/images/kitchen.png'),
-
- ];
-
- EdgeInsets getEdgeInsets(){return const  EdgeInsets.only(
-                top: kDefaultPadding / 2,
-                right: kDefaultPadding,
-                left: kDefaultPadding,
-                bottom: kDefaultPadding/2);}
-
-/* Room class*/
-  class Room {
-  String? name;
-  String?  iconsPath;
-  bool?  status; 
-  double? temperature;
-  double? humidity;
-
-  setHumidity(double humidity){
-    this.humidity=humidity;
-  }
-
-  setTemperature(double temperature){
-    this.temperature=temperature;
-  }
-
-  setStatus(bool status){
-    this.status=status;
-  }
-
-
-  List<AppliancesInfo> appliances;
-
-  Room({required this.name, 
-       required this.iconsPath, 
-       required this.status, 
-       required this.temperature, 
-       required this.humidity, 
-       required this.appliances});
-  
-  }
- 
-
-  List<Room> rooms=[
-    Room(name:'Toilets',
-         iconsPath: 'assets/icons/bathtub.svg',
-         status:true,
-         temperature: 10,
-         humidity:50,
-         appliances: [
-           appliancesSetRoomName('Toilets',water_heater),
-           appliancesSetRoomName('Toilets',blow_dryer),
-           appliancesSetRoomName('Toilets',light),
-          appliancesSetRoomName('Toilets', air_conditioner),
-           appliancesSetRoomName('Toilets',washing_machine)
-          ]),
-
-    Room(name:'Living Room',
-        iconsPath: 'assets/icons/sofa.svg',
-        status:true,
-        temperature: 10,
-         humidity:50,
-         appliances: [
-           appliancesSetRoomName('Living Room',tv),
-          appliancesSetRoomName('Living Room',air_conditioner),
-          appliancesSetRoomName('Living Room',light)]),
-
-
-    Room(name:'Kitchen',
-        iconsPath: 'assets/icons/kitchen.svg',
-        status:true,
-        temperature: 10,
-        humidity:50,
-        appliances: [
-           appliancesSetRoomName('Kitchen',dish_washer),
-          appliancesSetRoomName('Kitchen',Refrigerator),
-          appliancesSetRoomName('Kitchen',coffee_maker),
-          appliancesSetRoomName('Kitchen',gas_stove),
-          appliancesSetRoomName('Kitchen',microwave),
-          appliancesSetRoomName('Kitchen',rice_cooker),
-          appliancesSetRoomName('Kitchen',light)]),
-
-    Room(name:'BedRoom',
-         iconsPath: 'assets/icons/bed.svg',
-         status:true,
-         temperature: 10,
-         humidity:50,
-         appliances: [
-           appliancesSetRoomName('BedRoom',light),
-         appliancesSetRoomName('BedRoom',air_conditioner)]),
-  ];
-
-
-
-List<AppliancesInfo> getListRunningAppliancse(List<Room> rooms){
-  List<AppliancesInfo> runningAppliances=[];
-
-  for (Room room in rooms){
-    for (AppliancesInfo appliance in room.appliances ){
-      if (appliance.status!){
-        runningAppliances.add(appliance);
-      }
+  for (int i = 0; i < coeffition.length; i++) {
+    if (length == hourConsumerData.length) {
+      result.add(ConsomeElectricPowerData(
+          average[i].time, coeffition[i] * requiredPower));
+    } else if (length == dayConsumerData.length) {
+      result.add(ConsomeElectricPowerData(
+          average[i].time, coeffition[i] * requiredPower * length));
+    } else if (length == weekConsumerData.length) {
+      result.add(ConsomeElectricPowerData(
+          average[i].time, coeffition[i] * 7 * requiredPower * length));
+    } else if (length == monthConsumerData.length) {
+      result.add(ConsomeElectricPowerData(
+          average[i].time, coeffition[i] * requiredPower * 30 * length));
     }
   }
-  return runningAppliances;
+  return result;
 }
 
-AppliancesInfo appliancesSetRoomName( String roomName, appliance){
-  appliance.setRoomName(roomName);
-  return appliance;
+class ChartSampleData {
+  String? period;
+  double? average;
+  double? required_;
+
+  ChartSampleData({this.period, this.average, this.required_});
 }
+
+EdgeInsets getEdgeInsets() {
+  return const EdgeInsets.only(
+      top: kDefaultPadding / 2,
+      right: kDefaultPadding,
+      left: kDefaultPadding,
+      bottom: kDefaultPadding / 2);
+}
+
+Home homeConstant = Home();
+int currentRooms = -1;

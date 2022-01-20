@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ui_electric_bell/composent/home_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ui_electric_bell/composent/home_page/home_page.dart';
+import 'package:ui_electric_bell/constants.dart';
 import 'package:ui_electric_bell/welcome/home_welcome.dart';
 
 
@@ -25,6 +27,20 @@ class FireAuth {
       await user!.updateProfile(displayName: name);
       await user.reload();
       user = auth.currentUser;
+      user = userCredential.user;
+      try{
+         final prefs = await SharedPreferences.getInstance();
+         prefs.setString('uid',user!.uid);
+         var testName=user.displayName;
+         if(testName!=null){
+         prefs.setString('name',testName);
+         }
+         var testEmail=user.email;
+         if(testEmail!=null){
+         prefs.setString('email',testEmail);
+         }
+      }catch(e){}
+      
       toWidget(context);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -48,6 +64,7 @@ class FireAuth {
     required BuildContext context,
   }) async {
     FirebaseAuth auth = FirebaseAuth.instance;
+   
     User? user;
 
     try {
@@ -56,6 +73,22 @@ class FireAuth {
         password: password,
       );
       user = userCredential.user;
+      try{
+         final prefs = await SharedPreferences.getInstance();
+         prefs.setString('uid',user!.uid);
+         var testName=user.displayName;
+         if(testName!=null){
+         prefs.setString('name',testName);
+         }
+         var testEmail=user.email;
+         if(testEmail!=null){
+         prefs.setString('email',testEmail);
+         }
+      }catch(e){}
+      
+      
+      
+      
       toWidget(context);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -86,6 +119,7 @@ class FireAuth {
         print('User is currently signed out!');
       } else {
         print('User is signed in!');
+        
         state = 1;
       }
     });
@@ -129,4 +163,6 @@ class FireAuth {
       print(e.code);
     }
   }
+
+  
 }

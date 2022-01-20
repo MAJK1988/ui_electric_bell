@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'package:ui_electric_bell/auth/Screens/Welcome/welcome_screen.dart';
-import 'package:ui_electric_bell/composent/home_page.dart';
+import 'package:ui_electric_bell/composent/home_page/home_page.dart';
 import 'package:ui_electric_bell/constants.dart';
 
 import 'pointer.dart';
